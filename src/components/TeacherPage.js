@@ -30,7 +30,7 @@ function StudentList({ courseName }) {
   return (
     <div>
       <Typography variant="h5" gutterBottom>
-        Course : {courseName}
+        Course ID : {courseName}
       </Typography>
 
       {students.length > 0 ? (
@@ -98,13 +98,26 @@ console.log(teacher_name);
     // Use navigate to navigate to another route
     navigate('/teacher/add'); // Replace with the desired route
   };
+  const handleLogout = () => {
+    // Perform logout logic here
+    // For example, clear any authentication tokens or user information in the state
+    // Navigate to the specified logout page
+    navigate('/'); // Replace '/logout' with the actual logout page path
+  };
 
   return (
     <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
       <Grid item xs={10} sm={6} md={4}>
         <Paper elevation={3} style={{ padding: '20px', textAlign: 'center' }}>
+        <Button
+            variant="outlined"
+            style={{ position: 'absolute', top: 10, right: 10 }}
+            onClick={handleLogout}
+          >
+            Logout
+            </Button>
           <Typography variant="h4" gutterBottom>
-            Teacher Name: {teacher_name}
+            Teacher Id: {teacher_name}
           </Typography>
           {courses.length > 0 ? (
             courses.map((course, index) => (

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { Grid } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function StudentPage({ student_name }) {
   const currentPath = window.location.pathname;
@@ -13,6 +13,8 @@ function StudentPage({ student_name }) {
   const lastSlashIndex = currentPath.lastIndexOf('/');
   const studentName = lastSlashIndex !== -1 ? currentPath.slice(lastSlashIndex + 1) : '';
   student_name = studentName;
+  const navigate = useNavigate();
+
   const receivedData = location.state;
   console.log(student_name);
   const roll_no=student_name;
@@ -60,6 +62,12 @@ function StudentPage({ student_name }) {
     // Check if the student is already enrolled in the given course
     return studentEnrollments.some(enrollment => enrollment.course_name === courseName);
   };
+  const handleLogout = () => {
+    // Perform logout logic here
+    // For example, clear any authentication tokens or user information in the state
+    // Navigate to the specified logout page
+    navigate('/'); // Replace '/logout' with the actual logout page path
+  };
 
   const availableCourses = coursesData.filter(course => !isEnrolled(course.c_id));
 
@@ -67,6 +75,13 @@ function StudentPage({ student_name }) {
     <Grid container justifyContent="center" alignItems="center" style={{ height: '100vh' }}>
       <Grid item xs={10} sm={6} md={4}>
         <Paper elevation={3} style={{ padding: '20px', textAlign: 'center' }}>
+        <Button
+            variant="outlined"
+            style={{ position: 'absolute', top: 10, right: 10 }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
           <Typography variant="h4" gutterBottom>
             studentDetails.name
           </Typography>
